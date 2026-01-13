@@ -214,6 +214,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5580182036786632085, guid: 15d2af2f41f6c964983ee9b74a10762b, type: 3}
+      propertyPath: takeOff
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5580182036786632085, guid: 15d2af2f41f6c964983ee9b74a10762b, type: 3}
       propertyPath: joystick
       value: 
       objectReference: {fileID: 1985001675}
@@ -701,7 +705,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1761662214
 RectTransform:
   m_ObjectHideFlags: 0

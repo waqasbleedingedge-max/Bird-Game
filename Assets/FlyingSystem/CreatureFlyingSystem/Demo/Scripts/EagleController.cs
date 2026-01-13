@@ -195,39 +195,39 @@ public class EagleController : MonoBehaviour
 
     void MobileCameraControlLogic()
     {
-        // Temporarily use mouse to simulate the touch
-        if (Input.GetMouseButton(0) && Input.mousePosition.x > screenCenterX)
-        {
-            targetSpringArmRotationX = springArmTransform.rotation.eulerAngles.x - Input.GetAxis("Mouse Y") * mobileCameraSpeed * Time.deltaTime;
-            targetSpringArmRotationY = springArmTransform.rotation.eulerAngles.y + Input.GetAxis("Mouse X") * mobileCameraSpeed * Time.deltaTime;
-
-            creatureFlyingSystem.AddYawInput(Input.GetAxis("Mouse X"));
-        }
-        else
-        {
-            targetSpringArmRotationX = springArmTransform.rotation.eulerAngles.x;
-            targetSpringArmRotationY = springArmTransform.rotation.eulerAngles.y;
-        }
-
-        // Only for mobile devices(uncomment the following and test on physical mobile devices)
-        //if (Input.touchCount > 0)
+        //// Temporarily use mouse to simulate the touch
+        //if (Input.GetMouseButton(0) && Input.mousePosition.x > screenCenterX)
         //{
-        //    for (var i = 0; i < Input.touchCount; i++)
-        //    {
-        //        if (Input.GetTouch(i).position.x > screenCenterX && Input.GetTouch(i).phase == TouchPhase.Moved)
-        //        {
-        //            targetSpringArmRotationX = springArmTransform.rotation.eulerAngles.x - Input.GetTouch(i).deltaPosition.y * mobileCameraSpeed * Time.deltaTime;
-        //            targetSpringArmRotationY = springArmTransform.rotation.eulerAngles.y + Input.GetTouch(i).deltaPosition.x * mobileCameraSpeed * Time.deltaTime;
+        //    targetSpringArmRotationX = springArmTransform.rotation.eulerAngles.x - Input.GetAxis("Mouse Y") * mobileCameraSpeed * Time.deltaTime;
+        //    targetSpringArmRotationY = springArmTransform.rotation.eulerAngles.y + Input.GetAxis("Mouse X") * mobileCameraSpeed * Time.deltaTime;
 
-        //            creatureFlyingSystem.AddYawInput(Input.GetTouch(i).deltaPosition.x);
-        //        }
-        //    }
+        //    creatureFlyingSystem.AddYawInput(Input.GetAxis("Mouse X"));
         //}
         //else
         //{
         //    targetSpringArmRotationX = springArmTransform.rotation.eulerAngles.x;
         //    targetSpringArmRotationY = springArmTransform.rotation.eulerAngles.y;
         //}
+
+        // Only for mobile devices(uncomment the following and test on physical mobile devices)
+        if (Input.touchCount > 0)
+        {
+            for (var i = 0; i < Input.touchCount; i++)
+            {
+                if (Input.GetTouch(i).position.x > screenCenterX && Input.GetTouch(i).phase == TouchPhase.Moved)
+                {
+                    targetSpringArmRotationX = springArmTransform.rotation.eulerAngles.x - Input.GetTouch(i).deltaPosition.y * mobileCameraSpeed * Time.deltaTime;
+                    targetSpringArmRotationY = springArmTransform.rotation.eulerAngles.y + Input.GetTouch(i).deltaPosition.x * mobileCameraSpeed * Time.deltaTime;
+
+                    creatureFlyingSystem.AddYawInput(Input.GetTouch(i).deltaPosition.x);
+                }
+            }
+        }
+        else
+        {
+            targetSpringArmRotationX = springArmTransform.rotation.eulerAngles.x;
+            targetSpringArmRotationY = springArmTransform.rotation.eulerAngles.y;
+        }
 
         springArmTransform.rotation = Quaternion.Euler(targetSpringArmRotationX, targetSpringArmRotationY, 0.0f);
     }
