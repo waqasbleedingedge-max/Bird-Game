@@ -80,7 +80,7 @@ public class EagleController : MonoBehaviour
             else
             {
                 MobileInputControlLogic();
-                MobileCameraControlLogic();
+               MobileCameraControlLogic();
             }
         }
     }
