@@ -44,6 +44,7 @@ public class ParrotController : MonoBehaviour
 
         if (transform.position.y < 0f)
         {
+            Debug.Log("Failed");
             LevelFailed?.Invoke();
         }
     }
