@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 using FlyingSystem;
 
@@ -51,10 +51,33 @@ public class EagleController : MonoBehaviour
     public float mobileCameraSpeed = 300.0f;
     private float screenCenterX;
 
+
+
+    public float maxPitchAngle = 30f; // eagle max nose up
+    public float minPitchAngle = -30f; // eagle max nose down
+  
+
+
+    private float initialY; // starting height
+    private float targetY;
+
+    [Header("Ascend / Descend")]
+
+    public float ascendSpeed = 5f;            // speed going up when holding
+    public float descendSpeed = 3f;           // speed going down when releasing
+    private float minY;                       // minimum allowed height (ground/starting Y)
+                                              // minimum height (ground/initial)
+
+
     void Start()
     {
         characterTransform = this.transform;
-        characterCameraTransform = characterCamera.transform;
+        // characterCameraTransform = characterCamera.transform;
+
+        initialY = transform.position.y;
+        targetY = initialY;
+
+        minY = transform.position.y; // eagle can't go below this
 
         speedLineParticleRenderer.enabled = false;
 
@@ -70,19 +93,21 @@ public class EagleController : MonoBehaviour
 
     void Update()
     {
-        if (activated)
-        {
-            if (!mobileInputControl)
-            {
-                PCInputControlLogic();
-                CameraControlLogic();
-            }
-            else
-            {
-                MobileInputControlLogic();
-               MobileCameraControlLogic();
-            }
-        }
+       // print("creatureFlyingSystem.inAir : "+ creatureFlyingSystem.inAir);     for ground
+        //if (activated)
+        //{
+        //    if (!mobileInputControl)
+        //    {
+        //        PCInputControlLogic();
+        //        //CameraControlLogic();
+        //    }
+        //    else
+        //    {
+        //        MobileInputControlLogic();
+        //      // MobileCameraControlLogic();
+        //    }
+        //}
+        MobileInputControlLogic();
     }
 
     public void Activate()
@@ -131,27 +156,90 @@ public class EagleController : MonoBehaviour
             Boost();
     }
 
+    //void MobileInputControlLogic()
+    //{
+    //    if (joystick == null) return;
+
+    //    float x = joystick.inputAxisX;
+    //    float y = joystick.inputAxisY;
+
+    //    Debug.Log($"Joy X:{x}  Y:{y}");
+
+    //    if (y > 0.01f)
+    //        creatureFlyingSystem.FlyForward();
+    //    else if (y < -0.85f)
+    //        creatureFlyingSystem.SlowDown();
+    //    else if (creatureFlyingSystem.slowingDown && y > -0.85f)
+    //        creatureFlyingSystem.StopSlowingDown();
+
+    //    // 🔥 LEFT / RIGHT FIX
+    //    if (creatureFlyingSystem.inAir && Mathf.Abs(x) > 0.15f)
+    //    {
+    //        float turnSpeed = 120f; // adjust
+    //        transform.Rotate(0f, x * turnSpeed * Time.deltaTime, 0f);
+    //    }
+
+    //    DivingLogic();
+    //}
+
+
+
+
     void MobileInputControlLogic()
     {
-        if (joystick != null)
-        {
-            if (joystick.inputAxisY > 0.01f)
-                creatureFlyingSystem.FlyForward();
-            else if (joystick.inputAxisY < -0.85f)
-                creatureFlyingSystem.SlowDown();
-            else if (creatureFlyingSystem.slowingDown && joystick.inputAxisY > -0.85f)
-                creatureFlyingSystem.StopSlowingDown();
+        if (joystick == null || !creatureFlyingSystem.inAir) return;
 
-            DivingLogic();
-        }
+        float x = joystick.inputAxisX; // left/right
+        float y = joystick.inputAxisY; // forward/backward
+
+        Vector3 newPos = transform.position;
+
+        // --- LEFT / RIGHT ROTATION ---
+        RotateLeftRight(x);
+
+        // --- FORWARD / BACKWARD ---
+        float forwardSpeed = 10f;
+        newPos += transform.forward * y * forwardSpeed * Time.deltaTime;
+
+        // --- ASCEND / DESCEND ---
+       
+          newPos.y -= descendSpeed * Time.deltaTime;
+          if (newPos.y < minY) newPos.y = minY;
+     
+
+        transform.position = newPos;
+
+        // --- TILT (Roll/Pitch) ---
+        Vector3 currentEuler = transform.eulerAngles;
+        float targetPitch = Mathf.Clamp(y * 20f, -20f, 20f); // forward/back tilt
+        float targetRoll = Mathf.Clamp(-x * 20f, -20f, 20f);  // sideways tilt
+
+        Quaternion targetRotation = Quaternion.Euler(targetPitch, transform.eulerAngles.y, targetRoll);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 3f);
+
+        DivingLogic();
     }
+
+
+
+    void RotateLeftRight(float horizontalInput)
+    {
+        if (Mathf.Abs(horizontalInput) < 0.01f) return; // deadzone
+
+        float turnSpeed = 120f; // adjust as needed
+        transform.Rotate(0f, horizontalInput * turnSpeed * Time.deltaTime, 0f);
+    }
+
+
+
+
 
     void DivingLogic()
     {
         if (creatureFlyingSystem.inAir && creatureFlyingSystem.diving)
         {
             // Camera zoom out
-            characterCameraTransform.localPosition = Vector3.Lerp(characterCameraTransform.localPosition, new Vector3(0.0f, divingZoomOutY, divingZoomOutZ), 0.95f * Time.deltaTime);
+          //  characterCameraTransform.localPosition = Vector3.Lerp(characterCameraTransform.localPosition, new Vector3(0.0f, divingZoomOutY, divingZoomOutZ), 0.95f * Time.deltaTime);
 
             animator.SetBool("FlyToGlide", true);
             animator.SetBool("GlideToFly", false);
@@ -170,7 +258,7 @@ public class EagleController : MonoBehaviour
         else
         {
             // Reset all effects
-            characterCameraTransform.localPosition = Vector3.Lerp(characterCameraTransform.localPosition, new Vector3(0.0f, normalCameraY, normalCameraZ), 0.5f * Time.deltaTime);
+           // characterCameraTransform.localPosition = Vector3.Lerp(characterCameraTransform.localPosition, new Vector3(0.0f, normalCameraY, normalCameraZ), 0.5f * Time.deltaTime);
 
             animator.SetBool("GlideToFly", true);
             animator.SetBool("FlyToGlide", false);
@@ -347,4 +435,8 @@ public class EagleController : MonoBehaviour
             creatureFlyingSystem.stopFlying = false;
         }
     }
+
+
+
+    
 }

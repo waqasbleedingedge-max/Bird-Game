@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/FlyingSystem/CreatureFlyingSystem/Demo/Scenes/GamePlay.unity
-    guid: a3749735b58a60e48bc974ff996d92f5
+    path: Assets/FlyingSystem/CreatureFlyingSystem/Demo/Scenes/GamePlay 1.unity
+    guid: e8f63e3c40bea564691b80d5abca0808
   m_configObjects: {}

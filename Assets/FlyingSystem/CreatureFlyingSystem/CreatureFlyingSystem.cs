@@ -176,7 +176,7 @@ namespace FlyingSystem
         {
             if (Mathf.Abs(value) > 0.025f)
             {
-                flyingDirection = (rootTransform.position + new Vector3(0.0f, cameraLookAtMeshOffsetY, 0.0f) - cameraTransform.position).normalized;
+              //  flyingDirection = (rootTransform.position + new Vector3(0.0f, cameraLookAtMeshOffsetY, 0.0f) - cameraTransform.position).normalized;
 
                 targetMeshLocalRotation = Quaternion.LookRotation(flyingDirection, meshRootTransform.up);
 
