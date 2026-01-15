@@ -54,11 +54,9 @@ namespace Bird
         {
             if (PlayerPrefs.GetInt("Sound") == 0)
             {
-                Debug.Log("🔇 Sound OFF → Win sound not played");
                 return;
             }
 
-            Debug.Log("🏆 Win sound triggered");
 
             // sfxSource.PlayOneShot(winSound);
         }
@@ -67,11 +65,9 @@ namespace Bird
         {
             if (PlayerPrefs.GetInt("Sound") == 0)
             {
-                Debug.Log("🔇 Sound OFF → Lose sound not played");
                 return;
             }
 
-            Debug.Log("💀 Lose sound triggered");
 
             // sfxSource.PlayOneShot(loseSound);
         }
@@ -85,7 +81,6 @@ namespace Bird
             sound = sound == 1 ? 0 : 1;
             PlayerPrefs.SetInt("Sound", sound);
 
-            Debug.Log(sound == 1 ? "🔊 Sound ON" : "🔇 Sound OFF");
         }
     }
 }

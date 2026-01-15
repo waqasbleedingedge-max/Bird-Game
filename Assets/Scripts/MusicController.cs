@@ -31,7 +31,6 @@ namespace Bird
             if (!PlayerPrefs.HasKey("Music"))
                 PlayerPrefs.SetInt("Music", 1);
 
-            Debug.Log("🎵 MusicController started");
             PlayMusic();
         }
 
@@ -42,11 +41,9 @@ namespace Bird
         {
             if (PlayerPrefs.GetInt("Music") == 0)
             {
-                Debug.Log("🔇 Music OFF → Background music not played");
                 return;
             }
 
-            Debug.Log("🎶 Background music should start playing");
 
             // musicSource.clip = backgroundMusic;
             // musicSource.loop = true;
@@ -70,7 +67,6 @@ namespace Bird
             else
             {
                 PlayerPrefs.SetInt("Music", 1);
-                Debug.Log("🎵 Music ON");
 
                 PlayMusic();
             }

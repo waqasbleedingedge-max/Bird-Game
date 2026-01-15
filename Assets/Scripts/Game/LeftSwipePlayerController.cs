@@ -15,7 +15,6 @@ public class PlayerLeftRightMoveRotateY : MonoBehaviour, IDragHandler, IBeginDra
     public void OnBeginDrag(PointerEventData eventData)
     {
         lastPos = eventData.position;
-        Debug.Log("Swipe Start");
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -40,6 +39,5 @@ public class PlayerLeftRightMoveRotateY : MonoBehaviour, IDragHandler, IBeginDra
         float rotationY = swipeX * rotateSpeed * Time.deltaTime;
         player.Rotate(0f, rotationY, 0f);
 
-        Debug.Log($"Player moved: {swipeX}, rotated Y: {rotationY}");
     }
 }
