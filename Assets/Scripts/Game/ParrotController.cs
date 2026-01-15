@@ -33,9 +33,7 @@ public class ParrotController : MonoBehaviour
 
 
 
-    [Header("Ground Check")]
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private float groundCheckDistance = 0.25f;
+ 
 
   
     void Start()
