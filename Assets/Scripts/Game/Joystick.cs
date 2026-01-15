@@ -31,12 +31,16 @@ public class Joystick : MonoBehaviour, IDragHandler, IEndDragHandler
             // Update axes
             UpdateAxes();
 
-            // Stop resetting when close enough to center
             if (Vector3.Distance(joystickControllerTransform.position, joystickBackgroundTransform.position) < 0.1f)
             {
                 joystickControllerTransform.position = joystickBackgroundTransform.position;
+                inputAxisX = 0f;
+                inputAxisY = 0f;
+                x = 0f;
+                y = 0f;
                 reset = false;
             }
+
         }
     }
 
