@@ -42,7 +42,7 @@ public class ParrotController : MonoBehaviour
         HandleFlying();
         HandleTilt(x);
 
-        if (transform.position.y < 0f)
+        if (transform.position.y < -0.5f)
         {
             Debug.Log("Failed");
             LevelFailed?.Invoke();
