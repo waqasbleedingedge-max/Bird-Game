@@ -41,7 +41,7 @@ public class ParrotController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.useGravity = true;
         gravityLerp = 1f;
-        animator.SetBool("isGrounded", true);
+        //animator.SetBool("isGrounded", true);
     }
 
     void Update()
