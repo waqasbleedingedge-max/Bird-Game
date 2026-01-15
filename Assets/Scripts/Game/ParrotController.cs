@@ -63,21 +63,53 @@ public class ParrotController : MonoBehaviour
     }
 
     // ---------------- FLY ----------------
+    //void HandleFlying()
+    //{
+    //    if (isFly)
+    //    {
+    //        rb.useGravity = false;
+    //        rb.linearVelocity = new Vector3(rb.linearVelocity.x, flyUpForce, rb.linearVelocity.z);
+
+    //        animator.SetBool("Fly", true);
+    //        animator.SetBool("Idle", false);
+    //    }
+    //    else
+    //    {
+    //        rb.useGravity = true;
+    //    }
+    //}
+
+
     void HandleFlying()
     {
         if (isFly)
         {
             rb.useGravity = false;
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, flyUpForce, rb.linearVelocity.z);
+            rb.linearVelocity = new Vector3(
+                rb.linearVelocity.x,
+                flyUpForce,
+                rb.linearVelocity.z
+            );
 
             animator.SetBool("Fly", true);
             animator.SetBool("Idle", false);
         }
         else
         {
+            // ⭐ SLOW FALL (glide)
             rb.useGravity = true;
+
+            if (rb.linearVelocity.y < -2f)
+            {
+                rb.linearVelocity = new Vector3(
+                    rb.linearVelocity.x,
+                    -2f,   // fall limit
+                    rb.linearVelocity.z
+                );
+            }
         }
     }
+
 
     // ---------------- TILT (VISUAL ONLY) ----------------
     void HandleTilt(float x)
