@@ -9564,7 +9564,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7405945512741690059}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000015454326, y: -0.70710605, z: 0.000000015454294, w: 0.70710754}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 40.013847, y: 11.498669, z: -134.41902}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
@@ -9586,7 +9586,7 @@ Transform:
   - {fileID: 7625785522848293013}
   - {fileID: 6407134382638742993}
   m_Father: {fileID: 903377828625412042}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!23 &445868870407610449
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10080,7 +10080,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &511800759834768082
 GameObject:
@@ -15285,7 +15285,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!33 &1157533733858164334
 MeshFilter:
@@ -16921,14 +16921,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2749625605005558052}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: -0, z: 0.5689925, w: -0.82234275}
   m_LocalPosition: {x: -0, y: 26.276968, z: -0.0000011285794}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 823726568502835213}
   m_Father: {fileID: 2623286825698164085}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 290.64}
 --- !u!1 &1378449052344802502
 GameObject:
   m_ObjectHideFlags: 0
@@ -16945,7 +16945,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!23 &1379764006262876606
 MeshRenderer:
@@ -21046,7 +21046,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1872016804845073266
 Transform:
@@ -23549,12 +23549,13 @@ GameObject:
   - component: {fileID: 9070341160091173765}
   - component: {fileID: 153218410846422015}
   - component: {fileID: 587086752210709262}
+  - component: {fileID: 9070341160091173766}
   m_Layer: 0
   m_Name: SM_Bldg_City_AmusementPark_RocketRide_Rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!23 &2203031891754283992
 MeshRenderer:
@@ -28014,12 +28015,13 @@ GameObject:
   - component: {fileID: 1377005664386690392}
   - component: {fileID: 5532298582569975984}
   - component: {fileID: 6478775640246274060}
+  - component: {fileID: 6478775640246274061}
   m_Layer: 0
   m_Name: SM_Props_Windmill_Motor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2751529302670841181
 Transform:
@@ -29161,12 +29163,13 @@ GameObject:
   - component: {fileID: 2099693125937965524}
   - component: {fileID: 4825937545820865596}
   - component: {fileID: 6329453587276614784}
+  - component: {fileID: 6329453587276614785}
   m_Layer: 0
   m_Name: SM_Props_Windmill_Motor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &2889288040172726771
 GameObject:
@@ -30139,7 +30142,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2990423661409874081
 Transform:
@@ -32146,7 +32149,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &3267791264148482953
 GameObject:
@@ -40080,7 +40083,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!64 &3654777552870413970
 MeshCollider:
@@ -41576,7 +41579,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &3860609898557323181
 GameObject:
@@ -43383,7 +43386,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!33 &4122484511641060857
 MeshFilter:
@@ -44986,7 +44989,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!33 &4302673113010616040
 MeshFilter:
@@ -48155,7 +48158,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &4736568433659328417
 GameObject:
@@ -49722,7 +49725,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &4992303061052197216
 GameObject:
@@ -50020,7 +50023,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!33 &5035376710859789237
 MeshFilter:
@@ -50730,7 +50733,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &5118784259052302442
 GameObject:
@@ -52044,7 +52047,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &5269453449306026955
 Transform:
@@ -57610,7 +57613,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!33 &5938922990183303966
 MeshFilter:
@@ -58620,12 +58623,13 @@ GameObject:
   - component: {fileID: 7043016635591090022}
   - component: {fileID: 4496674029072151182}
   - component: {fileID: 3119012215865195058}
+  - component: {fileID: 7043016635591090023}
   m_Layer: 0
   m_Name: SM_Props_Windmill_Motor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!33 &6101791576574164348
 MeshFilter:
@@ -59889,7 +59893,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!33 &6237392260496407753
 MeshFilter:
@@ -60982,6 +60986,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6329453587276614785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2888814475329684904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53695e6179bd31e40a347bc7b814a1ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RotateZAxis
+  axis: 2
+  rotationSpeed: 90
 --- !u!1 &6333372712360346692
 GameObject:
   m_ObjectHideFlags: 0
@@ -61146,12 +61164,13 @@ GameObject:
   - component: {fileID: 7886921748034992613}
   - component: {fileID: 3650535765406815245}
   - component: {fileID: 2848208791873313969}
+  - component: {fileID: 7886921748034992614}
   m_Layer: 0
   m_Name: SM_Props_Windmill_Motor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6361643139150156316
 Transform:
@@ -62227,6 +62246,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6478775640246274061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2749625605005558052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53695e6179bd31e40a347bc7b814a1ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RotateZAxis
+  axis: 2
+  rotationSpeed: 90
 --- !u!23 &6480957581902621374
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -63660,12 +63693,13 @@ GameObject:
   - component: {fileID: 7569350935888693275}
   - component: {fileID: 3949951501717841395}
   - component: {fileID: 2593681784185548111}
+  - component: {fileID: 7569350935888693276}
   m_Layer: 0
   m_Name: SM_Props_Windmill_Motor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6653329849365178813
 Transform:
@@ -64007,7 +64041,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!33 &6697919893488965982
 MeshFilter:
@@ -66897,6 +66931,20 @@ Transform:
   - {fileID: 8777445272843405875}
   m_Father: {fileID: 6252685629748514635}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7043016635591090023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6091515285687644954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53695e6179bd31e40a347bc7b814a1ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RotateZAxis
+  axis: 2
+  rotationSpeed: 90
 --- !u!4 &7066199668113619912
 Transform:
   m_ObjectHideFlags: 0
@@ -70508,7 +70556,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!33 &7406456359173423410
 MeshFilter:
@@ -72237,6 +72285,20 @@ Transform:
   - {fileID: 8176796647472962894}
   m_Father: {fileID: 6805060744705595446}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7569350935888693276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6647038319148295271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53695e6179bd31e40a347bc7b814a1ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RotateZAxis
+  axis: 2
+  rotationSpeed: 90
 --- !u!4 &7569679557224324773
 Transform:
   m_ObjectHideFlags: 0
@@ -75746,6 +75808,20 @@ Transform:
   - {fileID: 8431182855697870000}
   m_Father: {fileID: 6487483264589556168}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7886921748034992614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6361126920544408985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53695e6179bd31e40a347bc7b814a1ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RotateZAxis
+  axis: 2
+  rotationSpeed: 90
 --- !u!1 &7891002342707846859
 GameObject:
   m_ObjectHideFlags: 0
@@ -79158,7 +79234,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!23 &8218234656465896601
 MeshRenderer:
@@ -79328,7 +79404,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8231778256886086824
 Transform:
@@ -83574,7 +83650,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8633757349299143141
 Transform:
@@ -87767,13 +87843,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2202310933629802587}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.9997933, z: -0, w: -0.02033171}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6443557296252938331}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 182.33, z: 0}
+--- !u!114 &9070341160091173766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2202310933629802587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53695e6179bd31e40a347bc7b814a1ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RotateZAxis
+  axis: 1
+  rotationSpeed: 90
 --- !u!1 &9071705821118586085
 GameObject:
   m_ObjectHideFlags: 0
