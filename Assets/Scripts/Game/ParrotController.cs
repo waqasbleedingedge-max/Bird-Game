@@ -55,11 +55,11 @@ public class ParrotController : MonoBehaviour
         HandleTilt(x);
         HandleAnimations(y);   // ⭐ NEW
 
-        if (transform.position.y < -0.5f)
-        {
-            Debug.Log("Failed");
-            LevelFailed?.Invoke();
-        }
+        //if (transform.position.y < -0.5f)
+        //{
+        //    Debug.Log("Failed");
+        //    LevelFailed?.Invoke();
+        //}
     }
 
 
