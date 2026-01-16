@@ -47,7 +47,7 @@ namespace Bird
 
             Debug.Log("🔊 Button click sound triggered");
 
-            // sfxSource.PlayOneShot(buttonClick);
+             sfxSource.PlayOneShot(buttonClick);
         }
 
         public void PlayWinSound()
@@ -58,7 +58,7 @@ namespace Bird
             }
 
 
-            // sfxSource.PlayOneShot(winSound);
+            sfxSource.PlayOneShot(winSound);
         }
 
         public void PlayLoseSound()
@@ -69,7 +69,7 @@ namespace Bird
             }
 
 
-            // sfxSource.PlayOneShot(loseSound);
+             sfxSource.PlayOneShot(loseSound);
         }
 
         // -------------------------

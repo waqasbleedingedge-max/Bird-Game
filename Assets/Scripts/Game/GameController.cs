@@ -37,13 +37,14 @@ namespace Bird
         [SerializeField] private GameObject failedPanel;
         [SerializeField] private GameObject completePanel;
 
-        [Header("LEVEL PREFABS (10)")]
-        [SerializeField] private GameObject[] levelPrefabs;
+        [Header("LEVEL OBJECTS IN SCENE (10)")]
+        [Tooltip("Scene me already placed level root objects. Inko prefab ki tarah instantiate mat karo, sirf enable/disable karo.")]
+        [SerializeField] private GameObject[] levelPrefabs; // scene objects
         private GameObject currentLevel;
 
         [Header("LEVEL INDEX SAVE KEY")]
-        [SerializeField] private string levelKey = "levelToPlay";
-        private int levelIndex; // 0-based
+        [SerializeField] private string levelKey = "levelToPlay"; // 1-based in prefs
+        private int levelIndex; // 0-based runtime
 
         [Header("⏳ TIMER (10 values in seconds)")]
         [SerializeField] private float[] levelTimers;
@@ -57,16 +58,12 @@ namespace Bird
         [SerializeField] private Transform bird;
         private Rigidbody birdRb;
 
-        // [Header("🎬 CUTSCENE TIMELINES (Optional 10)")]
-        // [SerializeField] private UnityEngine.Playables.PlayableDirector[] levelTimelines = new UnityEngine.Playables.PlayableDirector[10];
-
         private bool levelEnded;
-
-
 
         [Header("LEVEL UI")]
         [SerializeField] private Text levelText;
         [SerializeField] private string levelTextFormat = "Level {0}/{1}";
+
         private void Awake()
         {
             if (Instance == null) Instance = this;
@@ -82,10 +79,26 @@ namespace Bird
 
             if (bird != null) bird.TryGetComponent(out birdRb);
 
-            int saved = PlayerPrefs.GetInt(levelKey, 1);
-            levelIndex = Mathf.Clamp(saved - 1, 0, levelPrefabs.Length - 1);
+            DisableAllLevels();
+
+            int saved = PlayerPrefs.GetInt(levelKey, 1); // 1-based
+            levelIndex = Mathf.Clamp(saved - 1, 0, (levelPrefabs != null ? levelPrefabs.Length - 1 : 0));
 
             StartLevel(levelIndex);
+        }
+
+        private void OnEnable()
+        {
+            Level_1.LevelComplete += LevelComplete;
+            Level_2.LevelComplete += LevelComplete;
+            Level_3.LevelComplete += LevelComplete;
+        }
+
+        private void OnDisable()
+        {
+            Level_1.LevelComplete -= LevelComplete;
+            Level_2.LevelComplete -= LevelComplete;
+            Level_3.LevelComplete -= LevelComplete;
         }
 
         private void Update()
@@ -97,7 +110,7 @@ namespace Bird
         }
 
         // =========================
-        // TIMER (optimized)
+        // TIMER
         // =========================
         private void TickTimer()
         {
@@ -106,7 +119,6 @@ namespace Bird
             currentTimer -= Time.deltaTime;
             if (currentTimer < 0f) currentTimer = 0f;
 
-            // ✅ Update UI only when second changes
             int secNow = Mathf.CeilToInt(currentTimer);
             if (secNow != lastShownSecond)
             {
@@ -126,6 +138,7 @@ namespace Bird
             int sec = Mathf.FloorToInt(currentTimer % 60f);
             timerText.text = $"{min:00}:{sec:00}";
         }
+
         private void UpdateLevelUI()
         {
             if (levelText == null) return;
@@ -151,25 +164,36 @@ namespace Bird
             Time.timeScale = 1f;
 
             HidePanels();
-            UpdateLevelUI();   // ✅ ADD THIS
 
-            SpawnLevelPrefab(index);
-            SpawnBirdAtPoint(index);
-            StartLevelTimer(index);
+            SpawnLevelPrefab(index);   // enable current level
+            SpawnBirdAtPoint(index);   // spawn bird
+            StartLevelTimer(index);    // start timer
 
-            // ---------------- CUTSCENE (commented for now) ----------------
-            // PlayTimeline(index);
+            UpdateLevelUI();
+            UpdateTimerUI();
+        }
+
+        private void DisableAllLevels()
+        {
+            if (levelPrefabs == null) return;
+
+            for (int i = 0; i < levelPrefabs.Length; i++)
+            {
+                if (levelPrefabs[i] != null)
+                    levelPrefabs[i].SetActive(false);
+            }
         }
 
         private void SpawnLevelPrefab(int index)
         {
-            if (currentLevel != null)
-                Destroy(currentLevel);
+            DisableAllLevels();
 
-            if (levelPrefabs == null || index < 0 || index >= levelPrefabs.Length) return;
+            if (levelPrefabs == null || levelPrefabs.Length == 0) return;
+            if (index < 0 || index >= levelPrefabs.Length) return;
             if (levelPrefabs[index] == null) return;
 
-            currentLevel = Instantiate(levelPrefabs[index]);
+            currentLevel = levelPrefabs[index];
+            currentLevel.SetActive(true);
         }
 
         private void SpawnBirdAtPoint(int index)
@@ -184,6 +208,7 @@ namespace Bird
 
             if (birdRb != null)
             {
+                // ✅ FIX: Rigidbody velocity reset
                 birdRb.linearVelocity = Vector3.zero;
                 birdRb.angularVelocity = Vector3.zero;
             }
@@ -199,7 +224,6 @@ namespace Bird
 
             currentTimer = duration;
             lastShownSecond = -1; // force refresh
-            UpdateTimerUI();
         }
 
         private void HidePanels()
@@ -207,18 +231,6 @@ namespace Bird
             if (failedPanel) failedPanel.SetActive(false);
             if (completePanel) completePanel.SetActive(false);
         }
-
-        // ---------------- CUTSCENE (commented for now) ----------------
-        /*
-        private void PlayTimeline(int index)
-        {
-            if (levelTimelines == null || index < 0 || index >= levelTimelines.Length) return;
-            if (levelTimelines[index] == null) return;
-
-            levelTimelines[index].Stop();
-            levelTimelines[index].Play();
-        }
-        */
 
         // =========================
         // COMPLETE / FAIL
@@ -229,8 +241,37 @@ namespace Bird
             levelEnded = true;
 
             timerRunning = false;
+
+            int totalLevels = (levelPrefabs != null) ? levelPrefabs.Length : 0;
+            if (totalLevels <= 0) totalLevels = 1;
+
+            // current level number (1-based)
+            int currentLevelNumber = levelIndex + 1;
+
+            // next level number (1-based)
+            int nextLevelNumber = currentLevelNumber + 1;
+            if (nextLevelNumber > totalLevels)
+                nextLevelNumber = 1;
+
+            // ✅ MAIN: next playable level save
+            PlayerPrefs.SetInt(levelKey, nextLevelNumber);
+
+            // ✅ optional: highest unlocked for level selection
+            int highestUnlocked = PlayerPrefs.GetInt("HighestLevel", 1);
+            if (nextLevelNumber > highestUnlocked)
+                PlayerPrefs.SetInt("HighestLevel", nextLevelNumber);
+
+            // save coins
+            PlayerPrefs.SetInt("coins", coins);
+
+            PlayerPrefs.Save();
+
+            // ✅ keep runtime index synced (important)
+            levelIndex = nextLevelNumber - 1;
+
             if (completePanel) completePanel.SetActive(true);
 
+            SoundController.Instance?.PlayWinSound();
             Time.timeScale = 0f;
         }
 
@@ -240,8 +281,10 @@ namespace Bird
             levelEnded = true;
 
             timerRunning = false;
+
             if (failedPanel) failedPanel.SetActive(true);
 
+            SoundController.Instance?.PlayLoseSound();
             Time.timeScale = 0f;
         }
 
@@ -249,11 +292,10 @@ namespace Bird
         {
             Time.timeScale = 1f;
 
-            levelIndex++;
-            if (levelIndex >= levelPrefabs.Length)
-                levelIndex = 0;
+            // ✅ Always read from PlayerPrefs (always correct)
+            int saved = PlayerPrefs.GetInt(levelKey, 1); // 1-based
+            levelIndex = Mathf.Clamp(saved - 1, 0, (levelPrefabs != null ? levelPrefabs.Length - 1 : 0));
 
-            PlayerPrefs.SetInt(levelKey, levelIndex + 1);
             StartLevel(levelIndex);
         }
 
@@ -269,6 +311,7 @@ namespace Bird
         {
             coins += amount;
             PlayerPrefs.SetInt("coins", coins);
+            PlayerPrefs.Save();
             UpdateCoinText();
         }
 
@@ -278,6 +321,7 @@ namespace Bird
 
             coins -= amount;
             PlayerPrefs.SetInt("coins", coins);
+            PlayerPrefs.Save();
             UpdateCoinText();
             return true;
         }
@@ -342,8 +386,7 @@ namespace Bird
         // =========================
         public void ToggleSound()
         {
-            if (SoundController.Instance != null)
-                SoundController.Instance.ToggleSound();
+            SoundController.Instance?.ToggleSound();
             UpdateSoundIcon();
         }
 
@@ -370,8 +413,7 @@ namespace Bird
 
         public void PlayButtonSound()
         {
-            if (SoundController.Instance != null)
-                SoundController.Instance.PlayButtonSound();
+            SoundController.Instance?.PlayButtonSound();
         }
     }
 }

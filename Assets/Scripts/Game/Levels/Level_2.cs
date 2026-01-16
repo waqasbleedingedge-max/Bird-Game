@@ -1,16 +1,25 @@
+using System;
 using UnityEngine;
 
 public class Level_2 : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static Action LevelComplete;
+ 
+
+   
+    public void OnLevelCompleted()
     {
-        
+        LevelComplete?.Invoke();
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if(other.gameObject.CompareTag("Bird"))
+        {
+            print("Level 2 Completed");
+            LevelComplete?.Invoke();
+        }
     }
 }

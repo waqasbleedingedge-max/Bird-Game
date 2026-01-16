@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class PlayerRotateYOnly : MonoBehaviour, IDragHandler, IBeginDragHandler
@@ -11,9 +12,12 @@ public class PlayerRotateYOnly : MonoBehaviour, IDragHandler, IBeginDragHandler
 
     private Vector2 lastPos;
 
+    public static Action cameraIndicatorClick;
     public void OnBeginDrag(PointerEventData eventData)
     {
         lastPos = eventData.position;
+        cameraIndicatorClick?.Invoke();
+
     }
 
     public void OnDrag(PointerEventData eventData)

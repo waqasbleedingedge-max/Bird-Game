@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -16,6 +17,8 @@ public class Joystick : MonoBehaviour, IDragHandler, IEndDragHandler
     [HideInInspector] public float inputAxisX, inputAxisY;
 
     private bool reset = false;
+
+    public static Action OnClickJoyStick;
 
     void Update()
     {
@@ -48,6 +51,8 @@ public class Joystick : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         isMoving = true;
 
+        OnClickJoyStick?.Invoke();
+
         Vector2 direction = eventData.position - (Vector2)joystickBackgroundTransform.position;
 
         // Clamp the joystick to a circle
@@ -63,6 +68,9 @@ public class Joystick : MonoBehaviour, IDragHandler, IEndDragHandler
         UpdateAxes();
 
         reset = false;
+
+
+      
     }
 
     public void OnEndDrag(PointerEventData eventData)

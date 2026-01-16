@@ -31,7 +31,7 @@ public class ParrotController : MonoBehaviour
     private float x;
     private float y;
 
-
+    public static Action TakeOff;
 
  
 
@@ -154,8 +154,15 @@ public class ParrotController : MonoBehaviour
     }
 
     // ---------------- UI EVENTS ----------------
-    public void FlyHold() => isFly = true;
-    public void FlyRelease() => isFly = false;
+    public void FlyHold()
+    {
+        isFly = true;
+        TakeOff?.Invoke();
+    }
+    public void FlyRelease()
+    {
+        isFly = false;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
