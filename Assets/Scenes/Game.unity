@@ -6110,6 +6110,8 @@ MonoBehaviour:
   animator: {fileID: 708274599}
   isFly: 0
   isGrounded: 0
+  navRadius: 0.3
+  checkInterval: 0.15
 --- !u!82 &740836013
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7581,7 +7583,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &926926139
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16225,6 +16227,8 @@ MonoBehaviour:
   animator: {fileID: 107665914}
   isFly: 0
   isGrounded: 0
+  navRadius: 0.3
+  checkInterval: 0.15
 --- !u!82 &2110564650
 AudioSource:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ParrotController : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class ParrotController : MonoBehaviour
     [SerializeField] private float turnSpeed = 120f;
 
     [Header("Fly Settings")]
-    [SerializeField] private float flyUpForce = 7f;
+    [SerializeField] private float flyUpForce = 1f;
     [SerializeField] private float glideFallSpeed = 2f;     // how fast it can fall while gliding
     [SerializeField] private float gravityOnRelease = 0.4f; // smooth gravity return (0 = instant)
 
@@ -33,9 +34,15 @@ public class ParrotController : MonoBehaviour
 
     public static Action TakeOff;
 
- 
 
-  
+
+    [Header("NavMesh Trigger (Collider Like)")]
+    public float navRadius = 0.3f;
+    public float checkInterval = 0.15f;
+
+    private bool isOnNavMesh = false;
+    private float timer;
+    private NavMeshHit hit;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -55,16 +62,64 @@ public class ParrotController : MonoBehaviour
         HandleTilt(x);
         HandleAnimations(y);   // ⭐ NEW
 
-        //if (transform.position.y < -0.5f)
-        //{
-        //    Debug.Log("Failed");
-        //    LevelFailed?.Invoke();
-        //}
+        timer += Time.deltaTime;
+        if (timer >= checkInterval)
+        {
+            timer = 0f;
+            NavMeshTriggerCheck();
+        }
     }
 
+    void NavMeshTriggerCheck()
+    {
+        bool found = NavMesh.SamplePosition(
+            transform.position,
+            out hit,
+            navRadius,
+            NavMesh.AllAreas
+        );
+
+        // 🔥 ON ENTER (like OnTriggerEnter)
+        if (found && !isOnNavMesh)
+        {
+            isOnNavMesh = true;
+            OnNavMeshEnter();
+        }
+
+        // 🔥 ON EXIT (like OnTriggerExit)
+        else if (!found && isOnNavMesh)
+        {
+            isOnNavMesh = false;
+            OnNavMeshExit();
+        }
+    }
+
+    void OnNavMeshEnter()
+    {
+        Debug.Log("🟢 ENTER NavMesh (Collider Style)");
+
+        // yahan landing / walk logic laga sakte ho
+        // example:
+        // animator.SetBool("isGrounded", true);
 
 
+        isFly = false;
+        animator.SetBool("isGrounded", true);
+        animator.SetBool("Fly", false);
+        animator.SetBool("Idle", true);
+        animator.SetBool("Walk", false);
+    }
 
+    void OnNavMeshExit()
+    {
+        Debug.Log("🔴 EXIT NavMesh (Collider Style)");
+
+        // yahan fly / fall logic
+        // animator.SetBool("isGrounded", false);
+
+
+        animator.SetBool("isGrounded", false);
+    }
     void FixedUpdate()
     {
         HandleMovement(y);
@@ -164,17 +219,17 @@ public class ParrotController : MonoBehaviour
         isFly = false;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isFly = false;
-            animator.SetBool("isGrounded", true);
-            animator.SetBool("Fly", false);
-            animator.SetBool("Idle", true);
-            animator.SetBool("Walk", false);
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Ground"))
+    //    {
+    //        isFly = false;
+    //        animator.SetBool("isGrounded", true);
+    //        animator.SetBool("Fly", false);
+    //        animator.SetBool("Idle", true);
+    //        animator.SetBool("Walk", false);
+    //    }
+    //}
 
 
     private void OnCollisionExit(Collision collision)
