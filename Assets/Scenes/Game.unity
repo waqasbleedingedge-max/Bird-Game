@@ -1852,7 +1852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f16c1fe196a7a246a90edcf9f229082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 1
+  rotateSpeed: 0.5
   player: {fileID: 2110564652}
 --- !u!114 &208026402
 MonoBehaviour:
@@ -16752,7 +16752,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2136116536
 Transform:
   m_ObjectHideFlags: 0
@@ -16785,6 +16785,7 @@ MonoBehaviour:
   maxZ: 15
   speed: 2
   runDuration: 60
+  returnSpeed: 6
   enableOnStart:
   - {fileID: 1684701464}
   - {fileID: 926926138}
@@ -30106,7 +30107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1772358860262482475
 GameObject:
   m_ObjectHideFlags: 0
