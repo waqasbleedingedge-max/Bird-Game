@@ -87,18 +87,9 @@ namespace Bird
             StartLevel(levelIndex);
         }
 
-        private void OnEnable()
-        {
-            Level_1.LevelComplete += LevelComplete;
-            Level_2.LevelComplete += LevelComplete;
-            Level_3.LevelComplete += LevelComplete;
-        }
-
         private void OnDisable()
         {
-            Level_1.LevelComplete -= LevelComplete;
-            Level_2.LevelComplete -= LevelComplete;
-            Level_3.LevelComplete -= LevelComplete;
+            UnsubscribeAllLevelEvents();
         }
 
         private void Update()
@@ -107,6 +98,28 @@ namespace Bird
 
             TickTimer();
             CheckFallFail();
+        }
+
+        // =========================
+        // EVENTS (FIX)
+        // =========================
+        private void UnsubscribeAllLevelEvents()
+        {
+            Level_1.LevelComplete -= LevelComplete;
+            Level_2.LevelComplete -= LevelComplete;
+            Level_3.LevelComplete -= LevelComplete;
+            Level_4.LevelComplete -= LevelComplete;
+        }
+
+        private void SubscribeCurrentLevelEvent(int index)
+        {
+            UnsubscribeAllLevelEvents();
+
+            if (index == 0) Level_1.LevelComplete += LevelComplete;
+            else if (index == 1) Level_2.LevelComplete += LevelComplete;
+            else if (index == 2) Level_3.LevelComplete += LevelComplete;
+            else if (index == 3) Level_4.LevelComplete += LevelComplete;
+            // agar aur levels hain to yahan add kar lo
         }
 
         // =========================
@@ -136,7 +149,7 @@ namespace Bird
 
             int min = Mathf.FloorToInt(currentTimer / 60f);
             int sec = Mathf.FloorToInt(currentTimer % 60f);
-            timerText.text = $"{min:00}:{sec:00}";
+            timerText.text = $"Time: {min:00}:{sec:00}";
         }
 
         private void UpdateLevelUI()
@@ -163,11 +176,13 @@ namespace Bird
             levelEnded = false;
             Time.timeScale = 1f;
 
+            SubscribeCurrentLevelEvent(index); // ✅ only current level listens
+
             HidePanels();
 
-            SpawnLevelPrefab(index);   // enable current level
-            SpawnBirdAtPoint(index);   // spawn bird
-            StartLevelTimer(index);    // start timer
+            SpawnLevelPrefab(index);
+            SpawnBirdAtPoint(index);
+            StartLevelTimer(index);
 
             UpdateLevelUI();
             UpdateTimerUI();
@@ -208,7 +223,6 @@ namespace Bird
 
             if (birdRb != null)
             {
-                // ✅ FIX: Rigidbody velocity reset
                 birdRb.linearVelocity = Vector3.zero;
                 birdRb.angularVelocity = Vector3.zero;
             }
@@ -223,7 +237,7 @@ namespace Bird
                 duration = levelTimers[index];
 
             currentTimer = duration;
-            lastShownSecond = -1; // force refresh
+            lastShownSecond = -1;
         }
 
         private void HidePanels()
@@ -245,28 +259,33 @@ namespace Bird
             int totalLevels = (levelPrefabs != null) ? levelPrefabs.Length : 0;
             if (totalLevels <= 0) totalLevels = 1;
 
-            // current level number (1-based)
             int currentLevelNumber = levelIndex + 1;
 
-            // next level number (1-based)
-            int nextLevelNumber = currentLevelNumber + 1;
-            if (nextLevelNumber > totalLevels)
+            int nextLevelNumber;
+
+            // ✅ LAST LEVEL COMPLETE => BACK TO LEVEL 1
+            if (currentLevelNumber >= totalLevels)
+            {
                 nextLevelNumber = 1;
+                PlayerPrefs.SetInt(levelKey, 1);
 
-            // ✅ MAIN: next playable level save
-            PlayerPrefs.SetInt(levelKey, nextLevelNumber);
+                // ✅ OPTIONAL: agar unlock bhi reset chahiye
+                // PlayerPrefs.SetInt("HighestLevel", 1);
+            }
+            else
+            {
+                nextLevelNumber = currentLevelNumber + 1;
+                PlayerPrefs.SetInt(levelKey, nextLevelNumber);
 
-            // ✅ optional: highest unlocked for level selection
-            int highestUnlocked = PlayerPrefs.GetInt("HighestLevel", 1);
-            if (nextLevelNumber > highestUnlocked)
-                PlayerPrefs.SetInt("HighestLevel", nextLevelNumber);
+                int highestUnlocked = PlayerPrefs.GetInt("HighestLevel", 1);
+                if (nextLevelNumber > highestUnlocked)
+                    PlayerPrefs.SetInt("HighestLevel", nextLevelNumber);
+            }
 
-            // save coins
             PlayerPrefs.SetInt("coins", coins);
-
             PlayerPrefs.Save();
 
-            // ✅ keep runtime index synced (important)
+            // ✅ keep runtime index synced
             levelIndex = nextLevelNumber - 1;
 
             if (completePanel) completePanel.SetActive(true);
@@ -292,8 +311,7 @@ namespace Bird
         {
             Time.timeScale = 1f;
 
-            // ✅ Always read from PlayerPrefs (always correct)
-            int saved = PlayerPrefs.GetInt(levelKey, 1); // 1-based
+            int saved = PlayerPrefs.GetInt(levelKey, 1);
             levelIndex = Mathf.Clamp(saved - 1, 0, (levelPrefabs != null ? levelPrefabs.Length - 1 : 0));
 
             StartLevel(levelIndex);
