@@ -1436,8 +1436,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Bird.MenuController
   coinText: {fileID: 110124049}
   levelSelectionScene: Game
-  privacyPolicyURL: 
-  moreGamesURL: 
+  privacyPolicyURL: https://joystickjunkiesuserprivacy.blogspot.com/2025/08/privacy-privacy-policy-joystickjunkies.html
+  moreGamesURL: https://play.google.com/store/apps/dev?id=8022664416116137531
   rateUsURL: 
   soundButtonImage: {fileID: 1308926858}
   soundOnSprite: {fileID: 21300000, guid: 820c3394eb271d641941bc57106db0d4, type: 3}

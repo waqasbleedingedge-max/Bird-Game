@@ -45,9 +45,9 @@ namespace Bird
             }
 
 
-            // musicSource.clip = backgroundMusic;
-            // musicSource.loop = true;
-            // musicSource.Play();
+             musicSource.clip = backgroundMusic;
+             musicSource.loop = true;
+             musicSource.Play();
         }
 
         // -------------------------
@@ -62,7 +62,7 @@ namespace Bird
                 PlayerPrefs.SetInt("Music", 0);
                 Debug.Log("🔇 Music OFF");
 
-                // musicSource.Stop();
+                 musicSource.Stop();
             }
             else
             {

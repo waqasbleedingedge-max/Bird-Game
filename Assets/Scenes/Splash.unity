@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bird.MusicController
   musicSource: {fileID: 46350368}
-  backgroundMusic: {fileID: 0}
+  backgroundMusic: {fileID: 8300000, guid: 59dbc8a56679a474395f20206ea601ac, type: 3}
 --- !u!82 &46350368
 AudioSource:
   m_ObjectHideFlags: 0
@@ -177,7 +177,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 59dbc8a56679a474395f20206ea601ac, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -606,9 +606,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bird.SoundController
   sfxSource: {fileID: 752885401}
-  buttonClick: {fileID: 0}
-  winSound: {fileID: 0}
-  loseSound: {fileID: 0}
+  buttonClick: {fileID: 8300000, guid: f6d07f7801ad54c47bc65c98dde6c233, type: 3}
+  winSound: {fileID: 8300000, guid: 77d59d26ada3b824ca8a83cb339d8ad2, type: 3}
+  loseSound: {fileID: 8300000, guid: f2bea06d5d90bdd40b4273f8e51af5fc, type: 3}
 --- !u!82 &752885401
 AudioSource:
   m_ObjectHideFlags: 0

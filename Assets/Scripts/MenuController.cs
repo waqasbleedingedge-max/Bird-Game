@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -93,7 +94,7 @@ namespace Bird
         }
         public void OnRateUsURL()
         {
-            Application.OpenURL(rateUsURL);
+            Application.OpenURL("https://play.google.com/store/apps/details?id=" + Application.identifier);
         }
 
         public void OnPrivacyURL()
